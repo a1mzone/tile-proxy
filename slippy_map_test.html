@@ -23,7 +23,7 @@
         var map = L.map('map').setView([-26.2041, 28.0473], 12);
 
         // Add tile layer from FastAPI tile proxy
-        L.tileLayer('https://reports.intrade.app:58443/tiles/intrade:events_za_3857/{z}/{x}/{y}.png', {
+        L.tileLayer('https://your-server:8000/tiles/your_layer/{z}/{x}/{y}.png', {
             maxZoom: 22,
             tileSize: 256,
             attribution: 'Tiles from FastAPI Proxy'
