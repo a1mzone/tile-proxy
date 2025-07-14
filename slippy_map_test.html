@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slippy Map Test</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map centered on Johannesburg, South Africa
+        var map = L.map('map').setView([-26.2041, 28.0473], 12);
+
+        // Add tile layer from FastAPI tile proxy
+        L.tileLayer('https://reports.intrade.app:58443/tiles/intrade:events_za_3857/{z}/{x}/{y}.png', {
+            maxZoom: 22,
+            tileSize: 256,
+            attribution: 'Tiles from FastAPI Proxy'
+        }).addTo(map);
+    </script>
+</body>
+</html>
