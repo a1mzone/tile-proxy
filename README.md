@@ -1,6 +1,10 @@
 # Tile Proxy: FastAPI Slippy Map Tile Proxy
 
-A lightweight, production-ready FastAPI server that proxies XYZ (Slippy Map) tile requests to a GeoServer WMS backend. Designed for serving raster tiles (e.g., from GeoTIFFs) to web mapping clients like Leaflet, OpenLayers, or MapLibre.
+A lightweight, production-ready FastAPI server that proxies XYZ (Slippy Map) tile requests to a GeoServer WMS backend. 
+
+Designed for serving raster tiles (e.g., from GeoTIFFs) to web mapping clients like Leaflet, OpenLayers, or MapLibre.
+
+In my setup this instance is setup behind a nginx reverse proxy, sounds excesive I know proxy -> proxy -> GeoServer
 
 ## Features
 - Converts XYZ tile requests to WMS GetMap requests
@@ -11,9 +15,9 @@ A lightweight, production-ready FastAPI server that proxies XYZ (Slippy Map) til
 - Health check endpoint (`/health`)
 
 ## Requirements
-- Python 3.8+
+- Python 3.10+
 - GeoServer with WMS enabled and published layers
-- [python-dotenv](https://pypi.org/project/python-dotenv/), [fastapi](https://fastapi.tiangolo.com/), [uvicorn](https://www.uvicorn.org/), [cachetools](https://pypi.org/project/cachetools/), [requests](https://pypi.org/project/requests/)
+- requirements.txt 
 
 ## Setup
 
@@ -21,8 +25,6 @@ A lightweight, production-ready FastAPI server that proxies XYZ (Slippy Map) til
 2. **Install dependencies:**
    ```sh
    pip install -r requirements.txt
-   # or manually:
-   pip install fastapi uvicorn python-dotenv cachetools requests
    ```
 3. **Create a `.env` file** in the project root:
    ```ini
@@ -75,12 +77,7 @@ L.tileLayer('http://your-server:8000/tiles/intrade:your_layer/{z}/{x}/{y}.png', 
   nohup uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 > server.log 2>&1 &
   disown
   ```
-- **tmux:**
-  ```sh
-  tmux
-  uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
-  # Detach with Ctrl+b d
-  ```
+
 - **systemd:** (recommended for production)
   See the project documentation or ask for a sample service file.
 
@@ -88,6 +85,3 @@ L.tileLayer('http://your-server:8000/tiles/intrade:your_layer/{z}/{x}/{y}.png', 
 - Check logs for full WMS request URLs and errors.
 - Ensure your GeoServer layer names and SRS match your requests.
 - If tiles are blank, verify your GeoTIFF covers the requested BBOX.
-
-## License
-MIT 
