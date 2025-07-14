@@ -23,10 +23,12 @@ In my setup this instance is setup behind a nginx reverse proxy, sounds excesive
 
 1. **Clone the repository**
 2. **Install dependencies:**
+
    ```sh
    pip install -r requirements.txt
    ```
 3. **Create a `.env` file** in the project root:
+
    ```ini
    GEOSERVER_URL=http://192.168.0.28:8080/geoserver/intrade/wms
    CACHE_SIZE=10000
@@ -34,12 +36,14 @@ In my setup this instance is setup behind a nginx reverse proxy, sounds excesive
    DEBUG=True
    ```
 4. **Run the server (development):**
+
    ```sh
    uvicorn main:app --host 0.0.0.0 --port 8000 --reload
    ```
 
 ## Production Deployment
 - **Recommended:**
+
   ```sh
   uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
   # or with Gunicorn:
@@ -55,6 +59,7 @@ In my setup this instance is setup behind a nginx reverse proxy, sounds excesive
 - All origins, methods, and headers are allowed by default (suitable for web map clients).
 
 ## Example Usage (Leaflet)
+
 ```js
 L.tileLayer('http://your-server:8000/tiles/intrade:your_layer/{z}/{x}/{y}.png', {
     tileSize: 256,
